@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Новостная страница</title>
+</head>
+<body>
+    <h1>Новостная страница</h1>
+
+    <h2>Добавить новость</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать новость</button>
+    </form>
+
+    <hr>
+
+    {% if news %}
+        {% for item in news %}
+            <h2>{{ item.title }}</h2>
+            <p><strong>{{ item.short_description }}</strong></p>
+            <p>{{ item.text }}</p>
+            <p><em>Автор: {{ item.author.username }}, дата публикации: {{ item.pub_date }}</em></p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>Пока нет новостей.</p>
+    {% endif %}
+</body>
+</html>
